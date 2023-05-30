@@ -1,0 +1,72 @@
+﻿@using SayHenTai_WebApp.Infrastructure.Entities;
+@using SayHenTai_WebApp.Infrastructure;
+@model ChapterListModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="card">
+    <div class="card-header text-bold">
+        <i class="fas fa-fire"></i> Manga Info
+    </div>
+    <div class="card-body">
+
+        <div class="row" id="mangaInfo">
+            <div class="col-auto">
+                <img src="@Model.ImgCover" style="height:278px; width:193px;">
+            </div>
+            <div class="col">
+                <div class="py-1">
+                    <strong>Name: </strong> <span id="m_name">@Model.TenTruyen</span>
+                </div>
+                <div class="py-1">
+                    <strong>Other Name: </strong> <span id="m_name">
+                        @Model.TenKhac
+                    </span>
+                </div>
+                <div class="py-1">
+                    <strong>Author(s): </strong> <span id="m_name">@Model.TacGia</span>
+                </div>
+                <div class="py-1">
+                    <strong>Genre(s): </strong> <span id="m_name">@Model.TheLoai</span>
+                </div>
+                <div class="py-1">
+                    <strong>Status: </strong> <span id="m_name">@Model.TrangThai</span>
+                </div>
+                <div class="py-1">
+                    <strong>Description: </strong> <span id="m_name">
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <h3 class="mt-5 border-bottom py-2 d-flex justify-content-between"> Chapters 
+            <button onclick="toggle(this)" id="toggleBtn" value="Latest" class="btn btn-primary btn-sm list-btn"> Current: Latest
+            </button>
+        </h3>
+
+        <div class="manga-chapters d-flex" style="flex-direction: column;" id="mangaChapters">
+            <div class="list-chapter">
+                <ul class="list-item box-list-chapter">
+                    @foreach (var item in Model.lstChuongMuc)
+                    {
+                        <li class="wp-manga-chapter">
+                            <a href="/chi-tiet-truyen/@CoreUtility.UrlFromUnicode(Model.TenTruyen)-chapter-@item.ID-@item.ID_TRUYEN">@item.TEN</a>
+                            <span class="number-view">@item.SO_LAN_DOC views</span>
+                            <span class="chapter-release-date">
+                                <i>@item.THOI_GIAN_CAP_NHAT</i>
+                            </span>
+                        </li>
+                    }
+                </ul>
+                <div class="c-chapter-readmore total-view-chapter d-none" data-view="5293263">
+                    <a class="btn btn-link chapter-readmore less-chap">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,78 @@
+﻿@using SayHenTai_WebApp.Infrastructure.Entities;
+@model IReadOnlyList<TRUYEN>
+@{
+    ViewData["Title"] = "Home Page";
+    int itemCount = 0; // Biến đếm số lượng phần tử
+    int modelIndex = 0; // Chỉ số để duyệt qua danh sách Model
+}
+<div class="card">
+    <div class="card-header text-bold">
+        <i class="fas fa-fire"></i> Latest Manhwa
+    </div>
+    <div class="card-body">
+        <div id="loop-content" class="page-content-listing item-big_thumbnail">
+            @while (modelIndex < Model.Count)
+            {
+                <div class="page-listing-item">
+                    <div class="row row-eq-height">
+                        @for (int j = 0; j < 6 && modelIndex < Model.Count; j++)
+                        {
+                            <div class="col-6 col-md-2 badge-pos-2">
+                                <div class="page-item-detail manga">
+                                    <div id="manga-item-@Model[modelIndex].ID" class="item-thumb c-image-hover" data-post-id="@Model[modelIndex].ID">
+                                        <a href="/chuong-muc-truyen/@Model[modelIndex].Url-@Model[modelIndex].ID"
+                                           title="@Model[modelIndex].TEN">
+                                            <img fetchpriority="high" width="175" height="238"
+                                                 src="@Model[modelIndex].IMAGE_COVER"
+                                                 srcset=" @Model[modelIndex].IMAGE_COVER 175w,
+                                                          @Model[modelIndex].IMAGE_COVER 110w,
+                                                          @Model[modelIndex].IMAGE_COVER 350w"
+                                                 sizes="(max-width: 175px) 100vw, 175px"
+                                                 class="img-responsive"
+                                                 style="" alt="@Model[modelIndex].TEN" /><span class="manga-title-badges new">NEW</span>
+                                        </a>
+                                    </div>
+                                    <div class="item-summary">
+                                        <div class="post-title font-title">
+                                            <h3 class="h5">
+                                                <a href="/chuong-muc-truyen/@Model[modelIndex].Url-@Model[modelIndex].ID">
+                                                    @Model[modelIndex].TEN
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div class="meta-item rating">
+                                            <div class="post-total-rating allow_vote">
+                                                <i class="ion-ios-star ratings_stars rating_current"></i><i class="ion-ios-star ratings_stars rating_current"></i><i class="ion-ios-star ratings_stars rating_current"></i><i class="ion-ios-star ratings_stars rating_current"></i><i class="ion-ios-star-outline ratings_stars"></i><span class="score font-meta total_votes">@Model[modelIndex].RATING</span>
+                                            </div>
+                                        </div>
+                                        <div class="list-chapter">
+                                            <div class="chapter-item viewcount">
+                                                <span class="chapter font-meta">
+                                                    Views:
+                                                </span>
+                                                <span class="post-on font-meta">
+                                                    @Model[modelIndex].SO_LAN_DOC
+                                                </span>
+                                            </div>
+                                            <div class="chapter-item status">
+                                                <span class="chapter font-meta">
+                                                    Status:
+                                                </span>
+                                                <span class="post-on font-meta">
+                                                    @Model[modelIndex].TRANG_THAI
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            itemCount++;
+                            modelIndex++;
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@model LeechModel
+
+@using (Html.BeginForm("LeechLinkSayHenTai", "Leech", FormMethod.Post, new { id = "postInsert" }))
+{
+    <div class="input-group mb-3">
+        <input type="text" asp-for="url" class="form-control" placeholder="Nhập vào url truyện sayhentai.me" aria-label="Nhập vào url truyện sayhentai.me" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            @*<button class="btn btn-primary" type="button">Get link</button>*@
+            <input type="submit" class="btn btn-primary" value="Get link" />
+        </div>
+    </div>
+
+    @if (ViewBag.CheckStatus == true)
+    {
+        <div class="alert alert-success" role="alert">
+            Import vào csdl thành công!<br />
+        </div>
+    }
+}

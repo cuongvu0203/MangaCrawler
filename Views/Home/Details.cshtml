@@ -1,0 +1,47 @@
+﻿@using SayHenTai_WebApp.Infrastructure.Entities;
+@using SayHenTai_WebApp.Infrastructure;
+@model ChapterDetail
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="bread-crumb">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">
+                <a href="@Model.UrlCurrent">
+                    @Model.TenTruyen - @Model.ChapterName
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.ChapterName</li>
+        </ol>
+    </nav>
+</div>
+
+<div id="next-prev" class="my-2">
+    <div class="d-flex flex-wrap justify-content-between">
+        <a href="@Model.UrlPrevious"
+           class="btn btn-primary d-inline-block">← Previous</a>
+
+        <a href="@Model.UrlNext"
+           class="btn btn-primary d-inline-block">Next →</a>
+    </div>
+</div>
+
+<div id="chapters_list" class="text-center">
+    @foreach (var item in Model.lstChapter)
+    {
+        <img id="@item.ID_SOURCE" src="@item.IMAGE_URL" class="img-fluid" width="@item.WIDTH" height="@item.HEIGHT" alt="@item.ALT">
+    }
+</div>
+
+<div id="next-prev" class="my-2">
+    <div class="d-flex flex-wrap justify-content-between">
+        <a href="@Model.UrlPrevious"
+           class="btn btn-primary d-inline-block">← Previous</a>
+
+        <a href="@Model.UrlNext"
+           class="btn btn-primary d-inline-block">Next →</a>
+    </div>
+</div>
