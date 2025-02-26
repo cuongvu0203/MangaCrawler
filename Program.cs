@@ -5,7 +5,9 @@ using Microsoft.Extensions.WebEncoders;
 using SayHenTai_WebApp.Infrastructure;
 using SayHenTai_WebApp.Infrastructure.Caching;
 using SayHenTai_WebApp.Infrastructure.Data;
+using SayHenTai_WebApp.Infrastructure.MongoDB;
 using SayHenTai_WebApp.Infrastructure.Service;
+using SayHenTai_WebApp.Infrastructure.Service.Repositories;
 using System.Configuration;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -17,7 +19,9 @@ var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.Configure<Connections>(configuration.GetSection("Connections"));
-
+builder.Services.Configure<MongoOptions>(builder.Configuration.GetSection("MongoDB"));
+builder.Services.AddSingleton<MongoDbContext>();
+builder.Services.AddSingleton(typeof(GenericRepository<>));
 builder.Services.AddDataProtection();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
 {

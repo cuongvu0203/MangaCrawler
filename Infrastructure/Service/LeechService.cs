@@ -38,7 +38,7 @@ namespace SayHenTai_WebApp.Infrastructure.Service
 
             if (!string.IsNullOrEmpty(tenTruyen) && !string.IsNullOrEmpty(imgCoverUrl))
             {
-                var Id = await _leechTruyenData.InsertThongTinTruyenAsync(tenTruyen, imgCoverUrl);
+                var truyen = await _leechTruyenData.MgInsertThongTinTruyenAsync(tenTruyen, imgCoverUrl);
 
                 //Get Toàn bộ list chapter để đưa vào bảng CHUONG_MUC
                 HtmlNodeCollection ulList = doc.DocumentNode.SelectNodes("//ul[@class='list-item box-list-chapter limit-height']");
@@ -65,17 +65,17 @@ namespace SayHenTai_WebApp.Infrastructure.Service
                     model.URL = urlLinkChapter;
                     model.SO_LAN_DOC = int.Parse(numView);
                     model.THOI_GIAN_CAP_NHAT = releasedate.InnerText;
-                    model.ID_TRUYEN = Id;
+                    model.ID_TRUYEN = truyen.Id;
                     CptList.Add(model);
                 }
 
-                var IsTaoChuongMuc = _leechTruyenData.InsertListChuongMuc(CptList);
+                var IsTaoChuongMuc = _leechTruyenData.MgInsertListChuongMucAsync(CptList);
                 await Task.Delay(1000);
                 //Lấy dữ liệu từ bảng chương mục
-                var cacheKeyChuongMuc = CreateCacheKey.BuildDanhSachChuongMucByIdTruyenAsync(Id);
+                var cacheKeyChuongMuc = CreateCacheKey.BuildDanhSachChuongMucByIdTruyenAsync(truyen.Id);
                 var DsChuongMuc = await _memoryCacheService.GetOrCreate(cacheKeyChuongMuc, async () =>
                 {
-                    return await _leechTruyenData.GetDanhSachChuongMucTruyenByIdTruyen(Id);
+                    return await _leechTruyenData.MgGetDanhSachChuongMucTruyenByIdTruyen(truyen.Id);
                 }, CoreConstants.DefaultCacheTimeDay);
                 if(DsChuongMuc != null)
                 {
@@ -96,7 +96,7 @@ namespace SayHenTai_WebApp.Infrastructure.Service
                                 var imgAlt = imgClass.GetAttributeValue("alt", "");
                                 var imgId = imgClass.GetAttributeValue("id", "");
 
-                                CptModel.ID_CHUONG_MUC = itemCM.ID;
+                                CptModel.ID_CHUONG_MUC = itemCM.Id;
                                 CptModel.ID_TRUYEN = itemCM.ID_TRUYEN;
                                 CptModel.IMAGE_URL = imgUrl;
                                 CptModel.WIDTH = imgWidth;
@@ -107,7 +107,7 @@ namespace SayHenTai_WebApp.Infrastructure.Service
                             }
                         }
                     }
-                    var insertTruyen = _leechTruyenData.InsertListChiTietTruyen(Chapter);
+                    var insertTruyen = _leechTruyenData.MgInsertListChiTietTruyenAsync(Chapter);
                 }    
                 return true;
             }    

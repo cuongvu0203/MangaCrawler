@@ -1,9 +1,13 @@
-﻿namespace SayHenTai_WebApp.Infrastructure.Entities
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
+namespace SayHenTai_WebApp.Infrastructure.Entities
 {
     public class TRUYEN
     {
-
-        public decimal ID { set; get; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { set; get; }
         public string? TEN { set; get; }
         public string? TAC_GIA { set; get; }
         public int SO_LAN_DOC { set; get; }

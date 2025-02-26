@@ -31,13 +31,13 @@ namespace SayHenTai_WebApp.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> ChuongMucDetails(long id)
+        public async Task<IActionResult> ChuongMucDetails(string id)
         {
             var model = await _truyenService.getChuongMucTruyenByIdTruyen(id);
             return View(model);
         }
 
-        public async Task<IActionResult> Details(long IdChuongMuc, long IdTruyen)
+        public async Task<IActionResult> Details(string IdChuongMuc, string IdTruyen)
         {
             var model = await _truyenService.getDetailTruyenByIdTruyenAndIdChuongMuc(IdChuongMuc, IdTruyen);
             return View(model);

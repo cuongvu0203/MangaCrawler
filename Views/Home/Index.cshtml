@@ -19,8 +19,8 @@
                         {
                             <div class="col-6 col-md-2 badge-pos-2">
                                 <div class="page-item-detail manga">
-                                    <div id="manga-item-@Model[modelIndex].ID" class="item-thumb c-image-hover" data-post-id="@Model[modelIndex].ID">
-                                        <a href="/chuong-muc-truyen/@Model[modelIndex].Url-@Model[modelIndex].ID"
+                                    <div id="manga-item-@Model[modelIndex].Id" class="item-thumb c-image-hover" data-post-id="@Model[modelIndex].Id">
+                                        <a href="/chuong-muc-truyen/@Model[modelIndex].Url-@Model[modelIndex].Id"
                                            title="@Model[modelIndex].TEN">
                                             <img fetchpriority="high" width="175" height="238"
                                                  src="@Model[modelIndex].IMAGE_COVER"
@@ -35,7 +35,7 @@
                                     <div class="item-summary">
                                         <div class="post-title font-title">
                                             <h3 class="h5">
-                                                <a href="/chuong-muc-truyen/@Model[modelIndex].Url-@Model[modelIndex].ID">
+                                                <a href="/chuong-muc-truyen/@Model[modelIndex].Url-@Model[modelIndex].Id">
                                                     @Model[modelIndex].TEN
                                                 </a>
                                             </h3>
